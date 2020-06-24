@@ -1,0 +1,16 @@
+<mvc:View controllerName="schnelleinstiegWorkflowBuch.sapui5StartUI.controller.workflowStart" xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<Shell id="shell">
+		<App>
+			<Page title="Onboarding beantragen">
+				<content>
+					<Label text="E-Mail-Adresse:" labelFor="emailInput"/>
+					<Input id="emailInput" class="sapUiSmallMarginBottom" type="Email" placeholder="mail@host.de"
+						value="{ path : '/email', type : '.customEMailType' }"/>
+					<Button text="Onboarding beantragen" width="30%" press="onButtonClick"/>
+					<Text text="{/result}" maxLines="0" id="__text0"/>
+				</content>
+			</Page>
+		</App>
+	</Shell>
+</mvc:View>

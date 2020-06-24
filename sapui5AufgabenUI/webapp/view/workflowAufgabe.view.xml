@@ -1,0 +1,70 @@
+<mvc:View controllerName="schnelleinstiegWorkflowBuch.sapui5AufgabenUI.controller.workflowAufgabe" xmlns="sap.uxap"
+	xmlns:f="sap.ui.layout.form" xmlns:m="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+	<m:App id="idAppControl">
+		<m:pages>
+			<m:Page showHeader="false" showFooter="false">
+				<ObjectPageLayout id="objectPageLayout">
+					<headerTitle>
+						<ObjectPageHeader objectTitle="{task/Title}" objectSubtitle="{task/Description}"/>
+					</headerTitle>
+					<headerContent>
+						<f:SimpleForm title="Workflow Informationen" columnsL="2" columnsM="2" editable="true" layout="ResponsiveGridLayout">
+							<f:content>
+								<m:Label text="Erstellt am" labelFor="createdOn"/>
+								<m:Input id="createdOn" type="Text" width="100%" editable="false" value="{/task/CreatedOn}"/>
+								<m:Label text="Status" labelFor="status"/>
+								<m:Input id="status" type="Text" width="100%" editable="false" value="{/task/StatusText}"/>
+								<m:Label text="Priorität" labelFor="priority"/>
+								<m:Input id="priority" type="Text" width="100%" editable="false" value="{/task/PriorityText}"/>
+							</f:content>
+						</f:SimpleForm>
+					</headerContent>
+					<sections>
+						<ObjectPageSection>
+							<subSections>
+								<ObjectPageSubSection title="Persönliche Daten">
+									<blocks>
+										<ObjectPageLazyLoader>
+											<f:SimpleForm title="Benutzerdaten" columnsL="2" columnsM="2" editable="true" layout="ResponsiveGridLayout">
+												<f:content>
+													<m:Label text="Vorname" labelFor="firstName"/>
+													<m:Input id="firstName" editable="false" type="Text" width="100%" value="{/benutzer/givenName}"/>
+													<m:Label labelFor="lastName" text="Nachname"/>
+													<m:Input id="lastName" editable="false" type="Text" width="100%" value="{/benutzer/surname}"/>
+													<m:Label labelFor="email" text="E-Mail"/>
+													<m:Input id="email" editable="false" type="Email" width="100%" value="{/benutzer/mail}"/>
+												</f:content>
+											</f:SimpleForm>
+										</ObjectPageLazyLoader>
+									</blocks>
+								</ObjectPageSubSection>
+							</subSections>
+						</ObjectPageSection>
+						<ObjectPageSection>
+							<subSections>
+								<ObjectPageSubSection title="Vorstellung">
+									<blocks>
+										<ObjectPageLazyLoader>
+											<f:SimpleForm title="Beschreibung" editable="true" layout="ResponsiveGridLayout">
+												<m:MessageStrip text="Beschreibe dich in der dritten Person. Die Beschreibung wird durch das PMO veröffentlicht." type="Information"
+													showIcon="true"></m:MessageStrip>
+												<f:content>
+													<core:Title text="Berufliche Beschreibung"/>
+													<m:Label text="Beschreibung" labelFor="jobDescription"/>
+													<m:TextArea id="jobDescription" value="{/vorstellung/beruflich}" liveChange="handleLiveChangeBeruflich" growing="true"/>
+													<core:Title text="Persönliche Beschreibung"/>
+													<m:Label text="Beschreibung" labelFor="personalDescription"/>
+													<m:TextArea id="personalDescription" value="{/vorstellung/persoenlich}" liveChange="handleLiveChangePersoenlich" growing="true"/>
+												</f:content>
+											</f:SimpleForm>
+										</ObjectPageLazyLoader>
+									</blocks>
+								</ObjectPageSubSection>
+							</subSections>
+						</ObjectPageSection>
+					</sections>
+				</ObjectPageLayout>
+			</m:Page>
+		</m:pages>
+	</m:App>
+</mvc:View>

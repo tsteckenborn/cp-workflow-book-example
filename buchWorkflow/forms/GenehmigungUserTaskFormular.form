@@ -1,0 +1,85 @@
+{
+    "id": "genehmigungusertaskformular",
+    "name": "GenehmigungUserTaskFormular",
+    "revision": "Draft",
+    "type": "task",
+    "readOnly": false,
+    "content": [
+        {
+            "id": "allgemeine_daten",
+            "type": "section",
+            "title": "Allgemeine Daten",
+            "content": [
+                {
+                    "id": "vorname",
+                    "type": "string",
+                    "label": "Vorname",
+                    "readOnly": true,
+                    "value": "${context.benutzer.givenName}",
+                    "constraints": {
+                        "required": false
+                    }
+                },
+                {
+                    "id": "nachname",
+                    "type": "string",
+                    "label": "Nachname",
+                    "readOnly": true,
+                    "value": "${context.benutzer.surname}",
+                    "constraints": {
+                        "required": false
+                    }
+                },
+                {
+                    "id": "job_title",
+                    "type": "string",
+                    "label": "Job Title",
+                    "readOnly": true,
+                    "value": "${context.benutzer.jobTitle}",
+                    "constraints": {
+                        "required": false
+                    }
+                }
+            ]
+        },
+        {
+            "id": "kontaktdaten",
+            "type": "section",
+            "title": "Kontaktdaten",
+            "content": [
+                {
+                    "id": "mobiltelefon",
+                    "type": "string",
+                    "label": "Mobiltelefon",
+                    "readOnly": true,
+                    "value": "${context.benutzer.mobilePhone}",
+                    "constraints": {
+                        "required": false
+                    }
+                },
+                {
+                    "id": "e_mail_adresse",
+                    "type": "string",
+                    "label": "E-Mail-Adresse",
+                    "readOnly": true,
+                    "value": "${context.benutzer.mail}",
+                    "constraints": {
+                        "required": false
+                    }
+                }
+            ]
+        }
+    ],
+    "decisions": [
+        {
+            "id": "genehmigen",
+            "text": "Genehmigen",
+            "decisionType": "positive"
+        },
+        {
+            "id": "ablehnen",
+            "text": "Ablehnen",
+            "decisionType": "negative"
+        }
+    ]
+}

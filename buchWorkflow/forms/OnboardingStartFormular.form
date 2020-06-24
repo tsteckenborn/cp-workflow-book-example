@@ -1,0 +1,28 @@
+{
+    "id": "onboardingstartformular",
+    "name": "OnboardingStartFormular",
+    "revision": "Draft",
+    "type": "start",
+    "readOnly": false,
+    "content": [
+        {
+            "id": "e_mail_adresse",
+            "type": "string",
+            "label": "E-Mail-Adresse",
+            "placeholder": "mail@host.de",
+            "readOnly": false,
+            "value": "${context.input.email}",
+            "constraints": {
+                "required": true
+            }
+        }
+    ],
+    "actions": [
+        {
+            "id": "action1",
+            "text": "Onboarding beantragen",
+            "workflowDefinitionId": "onboarding",
+            "workflowPath": "/schnelleinstiegWorkflowBuch/buchWorkflow/workflows/onboarding.workflow"
+        }
+    ]
+}

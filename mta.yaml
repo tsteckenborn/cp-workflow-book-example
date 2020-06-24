@@ -1,0 +1,80 @@
+ID: schnelleinstiegWorkflowBuch
+_schema-version: '2.1'
+description: Beispielprojekt für den Schnelleinstieg in Workflows
+parameters:
+  deploy_mode: html5-repo
+version: 0.0.1
+modules:
+  - name: schnelleinstiegWorkflowBuch_appRouter
+    type: approuter.nodejs
+    path: schnelleinstiegWorkflowBuch_appRouter
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: schnelleinstiegWorkflowBuch_html5_repo_runtime
+      - name: uaa_schnelleinstiegWorkflowBuch
+      - name: schnelleinstieg-workflow-instanz
+  - name: schnelleinstiegWorkflowBuch_ui_deployer
+    type: com.sap.html5.application-content
+    path: schnelleinstiegWorkflowBuch_ui_deployer
+    requires:
+      - name: schnelleinstiegWorkflowBuch_html5_repo_host
+    build-parameters:
+      requires:
+        - name: sapui5StartUI
+          artifacts:
+            - './*'
+          target-path: resources/sapui5StartUI
+        - name: sapui5AufgabenUI
+          artifacts:
+            - './*'
+          target-path: resources/sapui5AufgabenUI
+  - name: buchWorkflow
+    type: com.sap.application.content
+    path: buchWorkflow
+    requires:
+      - name: schnelleinstieg-workflow-instanz
+        parameters:
+          content-target: true
+  - name: sapui5StartUI
+    type: html5
+    path: sapui5StartUI
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+  - name: sapui5AufgabenUI
+    type: html5
+    path: sapui5AufgabenUI
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+resources:
+  - name: schnelleinstiegWorkflowBuch_html5_repo_runtime
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: schnelleinstiegWorkflowBuch_html5_repo_host
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: schnelleinstieg-workflow-instanz
+    parameters:
+      service-plan: lite
+      service: workflow
+    type: org.cloudfoundry.existing-service
+  - name: uaa_schnelleinstiegWorkflowBuch
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+    type: org.cloudfoundry.managed-service
+  - name: dest_schnelleinstiegWorkflowBuch
+    parameters:
+      service-plan: lite
+      service: destination
+    type: org.cloudfoundry.managed-service
